@@ -7,10 +7,23 @@
     const height = +svg.attr('height');
 
     const render = data => {
+        const xValue = d => d.population;
+        const yValue = d => d.country;
+        
+        const xScale = d3.scaleLinear()
+            .domain([0, d3.max(data, xValue)])
+            .range([0, width]);
+        console.log('domain: ', xScale.domain(), 'range: ', xScale.range());
+
+        const yScale = d3.scaleBand()
+            .domain(data.map(yValue))
+            .range([0, height]);
+
         svg.selectAll('rect').data(data)
             .enter().append('rect')
-                .attr('width', 300)
-                .attr('height', 300);
+                .attr('y', d => yScale(yValue(d)))
+                .attr('width', d => xScale(xValue(d)))
+                .attr('height', yScale.bandwidth());
     };
 
 
@@ -18,7 +31,6 @@
         data.forEach(d => {
             d.population = +d.population * 1000;
         });
-        // console.log(data);
         render(data);
     });
 
