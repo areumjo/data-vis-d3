@@ -7,12 +7,13 @@
     const height = +svg.attr('height');
 
     const titleText = 'Top 10 Most Populous Countries';
+    const xAxisLabelText = 'Population';
 
     const render = data => {
         const xValue = d => d.population;
         const yValue = d => d.country;
 
-        const margin = { top: 50, right: 20, bottom: 20, left: 100 };
+        const margin = { top: 50, right: 20, bottom: 80, left: 100 };
         const innerWidth = width - margin.left - margin.right;
         const innerHeight = height - margin.top - margin.bottom;
 
@@ -29,9 +30,27 @@
         const g = svg.append('g')
             .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-        g.append('g').call(d3.axisLeft(yScale));
-        g.append('g').call(d3.axisBottom(xScale))
+        g.append('g').call(d3.axisLeft(yScale))
+            .selectAll('.domain, .tick line')
+                .remove();
+    
+        // add x-axis custom format
+        const xAxisTickFormat = number => 
+            d3.format('.3s')(number)
+                .replace('G', 'B');
+        const xAxis = d3.axisBottom(xScale)
+            .tickFormat(xAxisTickFormat)
+            .tickSize(-innerHeight);
+    
+        const xAxisGroup = g.append('g').call(xAxis)
             .attr('transform', `translate(0, ${innerHeight})`);
+        xAxisGroup.select('.domain').remove();
+        xAxisGroup.append('text')
+            .attr('class', 'axis-label')
+            .attr('y', 65)
+            .attr('x', innerWidth / 2)
+            .attr('fill', 'black')
+            .text(xAxisLabelText);
 
         g.selectAll('rect').data(data)
             .enter().append('rect')

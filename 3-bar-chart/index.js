@@ -1,4 +1,4 @@
-import { select, csv, scaleLinear, max, scaleBand, axisLeft, axisBottom } from 'd3';
+import { select, csv, scaleLinear, max, scaleBand, axisLeft, axisBottom, format } from 'd3';
 
 const svg = select('svg');
 
@@ -6,12 +6,13 @@ const width = +svg.attr('width');
 const height = +svg.attr('height');
 
 const titleText = 'Top 10 Most Populous Countries';
+const xAxisLabelText = 'Population';
 
 const render = data => {
     const xValue = d => d.population;
     const yValue = d => d.country;
     
-    const margin = { top: 20, right: 20, bottom: 20, left: 100 };
+    const margin = { top: 50, right: 20, bottom: 80, left: 100 };
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -30,9 +31,28 @@ const render = data => {
         .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
     // yAxis(g.append('g')); same as below code
-    g.append('g').call(axisLeft(yScale));
-    g.append('g').call(axisBottom(xScale))
+    // remove .domain (y-axis) and tick lines
+    g.append('g').call(axisLeft(yScale))
+        .selectAll('.domain, .tick line')
+            .remove();
+
+    // add x-axis custom format
+    const xAxisTickFormat = number => 
+        format('.3s')(number)
+            .replace('G', 'B');
+    const xAxis = axisBottom(xScale)
+        .tickFormat(xAxisTickFormat)
+        .tickSize(-innerHeight);
+
+    const xAxisGroup = g.append('g').call(xAxis)
         .attr('transform', `translate(0, ${innerHeight})`);
+    xAxisGroup.select('.domain').remove();
+    xAxisGroup.append('text')
+        .attr('class', 'axis-label')
+        .attr('y', 65)
+        .attr('x', innerWidth / 2)
+        .attr('fill', 'black')
+        .text(xAxisLabelText);
 
     g.selectAll('rect').data(data)
         .enter().append('rect')
