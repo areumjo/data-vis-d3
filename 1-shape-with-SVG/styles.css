@@ -1,0 +1,15 @@
+body {
+	margin: 0px;
+    overflow: hidden;
+/*  hidden-overflow will disappear scroll bar */
+}
+
+.lines {
+    stroke: black;
+    stroke-width: 10;
+}
+
+.lines path {
+	stroke: #25656d;
+    stroke-linejoin: round;
+}
