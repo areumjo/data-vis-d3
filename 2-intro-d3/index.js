@@ -12,7 +12,7 @@ const g = svg.append('g')
     .attr('transform', `translate(${width/2}, ${height/2})`);
 
 // d3 method chaining
-const circle = svg.append('circle')
+const circle = g.append('circle')
     .attr('r', height / 2)
     .attr('fill', 'yellow')
     .attr('stroke', 'black');
