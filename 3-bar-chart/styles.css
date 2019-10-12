@@ -1,0 +1,17 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+}
+
+rect {
+    fill: steelblue;
+}
+
+text {
+    font-size: 1.4em;;
+}
+
+.title {
+    font-size: 3em;
+    fill: #635F5D;
+}
