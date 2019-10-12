@@ -32,6 +32,31 @@ const rightEye = eyesG.append('circle')
     .attr('r', eyeRaius)
     .attr('cx', eyeSpacing);
 
+const eyebrowWidth = 70;
+const eyebrowHeight = 16;
+const eyebrowYOffset = -70;
+
+const eyebrowsG = eyesG.append('g')
+    .attr('transform', `translate(0, ${eyebrowYOffset})`);
+
+eyebrowsG
+    .transition().duration(2000)
+      .attr('transform', `translate(0, ${eyebrowYOffset - 50})`)
+    .transition().duration(2000)
+      .attr('transform', `translate(0, ${eyebrowYOffset})`);
+
+const leftEyebrow = eyebrowsG
+  .append('rect')
+    .attr('x', -eyeSpacing - eyebrowWidth/2)
+    .attr('width', eyebrowWidth)
+    .attr('height', eyebrowHeight);
+
+const rightEyebrow = eyebrowsG
+  .append('rect')
+    .attr('x', eyeSpacing - eyebrowWidth/2)
+    .attr('width', eyebrowWidth)
+    .attr('height', eyebrowHeight);
+
 const mouth = g.append('path')
     .attr('d', arc()({
         innerRaius: 150,
