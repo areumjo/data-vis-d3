@@ -8,31 +8,29 @@ const width = parseFloat(svg.attr('width')); //960 as a string, need to convert 
 const height = +svg.attr('height'); //500, + mean same as parseFloat
 // console.log(typeof width, 'hey:', width); //num
 
+const g = svg.append('g')
+    .attr('transform', `translate(${width/2}, ${height/2})`);
+
 // d3 method chaining
 const circle = svg.append('circle')
     .attr('r', height / 2)
-    .attr('cx', width / 2 )
-    .attr('cy', height / 2)
     .attr('fill', 'yellow')
     .attr('stroke', 'black');
 
 const eyeSpacing = 100;
 const eyeYOffset = -70;
+const eyeRaius = 30;
 
-const leftEye = svg.append('circle')
-    .attr('r', 30)
-    .attr('cx', width / 2 - eyeSpacing)
-    .attr('cy', height / 2 + eyeYOffset)
-    .attr('fill', 'black');
+const eyesG = g.append('g')
+    .attr('transform', `translate(0, ${eyeYOffset})`);
 
-const rightEye = svg.append('circle')
-    .attr('r', 30)
-    .attr('cx', width / 2 + eyeSpacing)
-    .attr('cy', height / 2 + eyeYOffset)
-    .attr('fill', 'black');
+const leftEye = eyesG.append('circle')
+    .attr('r', eyeRaius)
+    .attr('cx', -eyeSpacing);
 
-const g = svg.append('g')
-    .attr('transform', `translate(${width/2}, ${height/2})`);
+const rightEye = eyesG.append('circle')
+    .attr('r', eyeRaius)
+    .attr('cx', eyeSpacing);
 
 const mouth = g.append('path')
     .attr('d', arc()({
