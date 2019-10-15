@@ -9,7 +9,7 @@ const render = data => {
 
   svg.append('text')
     .attr('class', 'title')
-    .attr('x', width/2-100-100)
+    .attr('x', width/2-150)
     .attr('y', 80)
     .text(title);
 
@@ -20,13 +20,15 @@ const render = data => {
   const xValue = d => d.year;
   const yValue = d => d.population;
   
+  // change x, y scale with d3.min and d3.max fn
   const xScale = d3.scaleTime()
-    .domain(d3.extent(data, xValue))
+    .domain([d3.min(data, xValue), d3.max(data, xValue)])
     .range([0, innerWidth]);
 
   const yScale = d3.scaleLinear()
-    .domain(d3.extent(data, yValue))
-    .range([innerHeight, 0]);
+    .domain([0, d3.max(data, yValue)])
+    .range([innerHeight, 0])
+    .nice();
 
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
@@ -55,12 +57,16 @@ const render = data => {
     .attr('fill', 'black')
     .text(xAxisLabel);
 
+  const yAxisTickFormat = number =>
+    d3.format('.1s')(number)
+      .replace('G', 'B');
+
   const yAxis = d3.axisLeft(yScale)
     .tickSize(-innerWidth)
-    .tickPadding(10);
+    .tickPadding(10)
+    .tickFormat(yAxisTickFormat);
 
-  const yAxisG = g.append('g').call(yAxis)
-    // .attr('transform', `translate(0,${innerHeight})`);
+  const yAxisG = g.append('g').call(yAxis);
 
   yAxisG.append('text')
     .attr('class', 'axis-label')

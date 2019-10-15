@@ -13,24 +13,33 @@
 ### Display Area
 - Define a function `areaGenerator` and append it to group
 ```js
-const lineGenerator = d3.line()
+const areaGenerator = d3.area()
   .x(d => xScale(xValue(d)))
-  .y(d => yScale(yValue(d)))
+  .y0(innerHeight)
+  .y1(d => yScale(yValue(d)))
   .curve(d3.curveBasis);
 
 g.append('path')
   .attr('class', 'line-path')
-  .attr('d', lineGenerator(data));
+  .attr('d', areaGenerator(data));
 ```
 
-### Add axis
+### Format y-axis
+- Create tickformat function with `d3.format()`
+  - reference [formatting numbers example](http://bl.ocks.org/zanarmstrong/05c1e95bf7aa16c4768e)
+```js
+const yAxisTickFormat = number =>
+  d3.format('.1s')(number)
+    .replace('G', 'B');
 
-### Stretch goal
-- I can add area with two colors (AM and PM) showing difference between AM and PM temperature in SF.
+const yAxis = d3.axisLeft(yScale)
+  .tickSize(-innerWidth)
+  .tickPadding(10)
+  .tickFormat(yAxisTickFormat);
+```
 
 ### End result
-- Just added data and line generate function
-![](5-1-line-chart.png)
-
-- Added axes and .domain from axis has same color as ticks
-![](5-2-line-chart-with-axes.png)
+- Just added data and area generate function
+![](6-1-area-chart.png)
+- Fixed y-axis format and adjusted scale for x, y axis for better vis
+![](6-2-area-chart-with-style.png)
