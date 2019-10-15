@@ -23,9 +23,13 @@ text {
   stroke: #C0C0BB;
 }
 
+.domain {
+  stroke: #C0C0BB;
+}
+
 .axis-label {
   font-size: 1.4em;
-  fill: #8E8883;
+  fill: rgb(53, 52, 51);
 }
 
 .title {

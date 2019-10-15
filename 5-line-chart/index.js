@@ -38,10 +38,42 @@ const render = data => {
     .y(d => yScale(yValue(d)))
     .curve(d3.curveBasis);
 
+  // axes
+  const xAxisLabel = "Time";
+  const yAxisLabel = "Temperature (C)";
+
+  const xAxis = d3.axisBottom(xScale)
+    .tickSize(-innerHeight)
+    .tickPadding(10);
+
+  const xAxisG = g.append('g').call(xAxis)
+    .attr('transform', `translate(0,${innerHeight})`);
+
+  xAxisG.append('text')
+    .attr('class', 'axis-label')
+    .attr('x', innerWidth/2)
+    .attr('y', 50)
+    .attr('fill', 'black')
+    .text(xAxisLabel);
+
+  const yAxis = d3.axisLeft(yScale)
+    .tickSize(-innerWidth)
+    .tickPadding(10);
+
+  const yAxisG = g.append('g').call(yAxis)
+    // .attr('transform', `translate(0,${innerHeight})`);
+
+  yAxisG.append('text')
+    .attr('class', 'axis-label')
+    .attr('x', -innerHeight/2+50)
+    .attr('y', -50)
+    .attr('fill', 'black')
+    .attr('transform', `rotate(-90)`)
+    .text(yAxisLabel);
+
   g.append('path')
     .attr('class', 'line-path')
     .attr('d', lineGenerator(data));
-
 }
 
 d3.csv('https://vizhub.com/curran/datasets/temperature-in-san-francisco.csv')
