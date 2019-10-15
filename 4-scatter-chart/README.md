@@ -18,3 +18,17 @@
   year: "1970"
 }
 ```
+
+### Add title and axes
+- Make constants for title and x/y axis label, when you change the constant, data vis will change
+  - will implement selection tool with React.js 
+  ![](4-3-different-data.png)
+
+
+### End result
+- Getting data with `d3.csv` and creating dots with style
+![](4-1-dots.png)
+- Added x-axis with grouping domain-removed-axis and x axis label
+![](4-1-dots-with-x-axis.png)
+- Added y-axis
+![](4-2-scatter-plot.png)
