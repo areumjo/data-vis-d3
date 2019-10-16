@@ -30,3 +30,7 @@ text {
   font-size: 1.8em;
   fill: #635F5D;
 }
+
+#menus select {
+  font-size: 1em;
+}

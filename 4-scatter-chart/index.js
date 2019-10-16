@@ -1,9 +1,21 @@
+import { dropdownMenu } from './dropdownMenu.js';
+
+// dropdownMenu(d3.select('#menus'), {
+//   options: ['A', 'B', 'C']
+// }); // this is same as below function
+
+d3.select('#menus')
+  .call(dropdownMenu, {
+    options: ['A', 'B', 'C']
+  })
+
 const svg = d3.select('svg');
 
 const width = +svg.attr('width');
 const height = +svg.attr('height');
 
 const render = data => {
+  // console.log(data.columns); // horserpower, weight, ...
 
   // constants
   const title = 'Cars: Horsepower vs Weight';
