@@ -1,7 +1,21 @@
 const svg = d3.select('svg');
 
-const projection = d3.geoNaturalEarth1();
+const projection = d3.geoEquirectangular();
 const pathGenerator = d3.geoPath().projection(projection);
+
+// title
+d3.select('body').append('text')
+  .attr('class', 'title')
+  .attr('x', 0)
+  .attr('y', 0)
+  .text('World map')
+
+// new group
+const g = svg.append('g');
+
+g.append('path')
+  .attr('class', 'sphere')
+  .attr('d', pathGenerator({type: 'Sphere'}));
 
 d3.json('https://unpkg.com/world-atlas@1.1.4/world/110m.json')
   .then(data => {

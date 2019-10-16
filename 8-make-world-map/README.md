@@ -14,6 +14,8 @@ console.log(data.objects.countries);
     ...
 }
 ```
+
+### *topojson*
 - Call `topojson.feature(topology, object)` [more info from documentation](https://github.com/topojson/topojson-client/blob/master/README.md#feature)
 
   - input the 2 countries data sets into the function and create a topojson object, which has a method called `.features `
@@ -30,3 +32,10 @@ console.log(data.objects.countries);
 - [TopoJSON](https://github.com/topojson/topojson)
   - an extension of GeoJSON that endoes topology
   - geometries in TopoJSON files are stitched together from shared lie segments called `arcs`
+
+### Projection
+- `d3.geoEquirectangular()`
+![](8-square-map.png)
+
+- `d3.geoNaturalEarth1()`
+![](8-sphere-map.png)
