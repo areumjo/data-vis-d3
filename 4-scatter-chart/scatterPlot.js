@@ -24,6 +24,7 @@ export const scatterPlot = (selection, props) => {
     .merge(g)
       .attr('transform', `translate(${margin.left},${margin.top})`);
   
+  // x-axis
   const xAxis = d3.axisBottom(xScale)
     .tickSize(-innerHeight)
     .tickPadding(10);
@@ -41,11 +42,11 @@ export const scatterPlot = (selection, props) => {
     .append('text')
       .attr('class', 'axis-label')
       .attr('y', 55)
-      .attr('fill', 'black')
     .merge(xAxisG.select('.axis-label'))
       .attr('x', innerWidth / 2)
       .text(xAxisLabel);
 
+  // y-axis
   const yAxis = d3.axisLeft(yScale)
     .tickSize(-innerWidth)
     .tickPadding(10);
@@ -63,7 +64,6 @@ export const scatterPlot = (selection, props) => {
     .append('text')
       .attr('class', 'axis-label')
       .attr('y', -53)
-      .attr('fill', 'black')
       .attr('transform', `rotate(-90)`)
       .attr('text-anchor', 'middle')
     .merge(yAxisG.select('.axis-label'))
@@ -72,10 +72,16 @@ export const scatterPlot = (selection, props) => {
 
   const circles = g.merge(gEnter)
     .selectAll('circle').data(data);
-  circles.enter().append('circle')
+  circles
+    .enter().append('circle')
+      .attr('cx', innerWidth / 2)
+      .attr('cy', innerHeight / 2)
+      .attr('r', 0)
     .merge(circles)
-      .attr('cx', d => xScale(xValue(d)))
+    .transition().duration(2000)
+    .delay((d, i) => i * 10)
       .attr('cy', d => yScale(yValue(d)))
+      .attr('cx', d => xScale(xValue(d)))
       .attr('r', circleRadius);
 
 }

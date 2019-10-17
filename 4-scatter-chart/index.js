@@ -30,13 +30,16 @@ const render = () => {
   d3.select('#x-menus')
     .call(dropdownMenu, {
       options: data.columns,
-      onOptionClicked: onXcolumnClicked
+      onOptionClicked: onXcolumnClicked,
+      selectedOption: xColumn
   });
 
   d3.select('#y-menus')
     .call(dropdownMenu, {
       options: data.columns,
-      onOptionClicked: onYcolumnClicked
+      onOptionClicked: onYcolumnClicked,
+      selectedOption: yColumn
+
   });
 
   svg.call(scatterPlot, {
