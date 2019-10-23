@@ -16,11 +16,9 @@ const render = data => {
     .domain(d3.extent(data, xValue))
     .range([0, innerWidth])
 
-
   const yScale = d3.scaleLinear()
     .domain(d3.extent(data, yValue))
     .range([innerHeight, 0])
-
 
   const g = svg.append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`);
@@ -59,20 +57,30 @@ const render = data => {
       .attr('opacity', '0.3')
 
 }
-const projection = d3.geoEquirectangular();
+
+// 122.3°W 47.6°N -- Seattle, WA
+const projection = d3.geoAlbers()
+  .scale(6000)
+  .center([0, 47.6])
+  .rotate([122.3, 0])
+  .translate([100, 100]); // position
+
 const pathGenerator = d3.geoPath().projection(projection);
 
-var svg2 = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height);
+var svgMap = d3.select("#map").append("svg")
+  .attr("width", width)
+  .attr("height", height);
 
 d3.json("kingCounty.json") 
   .then(data => {
     console.log(data);
-    svg2.append('path')
-      .datum(topojson.feature(data, data.features))
-      .attr("d", d3.geoPath().projection(d3.geoMercator()));
-
+    svgMap.selectAll('path')
+      .data(data.features)
+      .enter()
+      .append('path')
+      .attr("d", pathGenerator)
+      .attr("x", 500)
+      .attr("fill", "#ddc");
   })
 
 
