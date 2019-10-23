@@ -59,6 +59,22 @@ const render = data => {
       .attr('opacity', '0.3')
 
 }
+const projection = d3.geoEquirectangular();
+const pathGenerator = d3.geoPath().projection(projection);
+
+var svg2 = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json("kingCounty.json") 
+  .then(data => {
+    console.log(data);
+    svg2.append('path')
+      .datum(topojson.feature(data, data.features))
+      .attr("d", d3.geoPath().projection(d3.geoMercator()));
+
+  })
+
 
 d3.csv('https://gist.githubusercontent.com/GeniXiong/e7c6bf03262966c543faa26805bf8bc7/raw/8af03bd9fa937910c4046d0ebb65b442c9cb8cc9/seattleHousePrice2015.csv')
   .then(data => {
