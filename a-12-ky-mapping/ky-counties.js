@@ -1,4 +1,4 @@
-var counties = {
+export var counties = {
     "type": "FeatureCollection",
     "features": [
         {

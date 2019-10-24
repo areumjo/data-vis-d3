@@ -22,4 +22,32 @@ svg.append('g')
   .enter()
   .append('path')
   .attr('d', geoPath)
-  .attr('class', 'county');
+  .attr('class', 'county')
+  .attr('fill', function(d) {
+    
+  })
+  .on('mouseover', function(d) {
+  // console.log(d.properties.NAME)
+    d3.select('span').text(d.properties.NAME);
+    d3.select(this).attr('class', 'county hover');
+    // console.log(this)
+  })
+  .on('mouseout', function(d) {
+    d3.select('span').text('');
+    d3.select(this).attr('class', 'county');
+  });
+
+// // when you use TopoJSON
+// queue()
+//   .defer(d3.json, "ky-counties-topo.json")
+//   .await(ready);
+
+// function ready(error, counties){
+//   svg.append("g")
+//      .selectAll("path")
+//      .data(topojson.feature(counties, counties.objects.counties).features)
+//      .enter()
+//      .append("path")
+//      .attr("d", geoPath)
+//      .attr("class","county");  
+// }
