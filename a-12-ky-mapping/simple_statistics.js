@@ -1,6 +1,6 @@
 'use strict';
 
-(function(f) {
+function a(f) {
     if (typeof exports === 'object' && typeof module !== 'undefined'){
         module.exports = f();
     } else if (typeof define === 'function' && define.amd) {
@@ -18,9 +18,9 @@
         }
         g.ss = f();
     }
-}(function() {
+}
+function b() {
     // # simple-statistics
-    //
     // A simple, literate statistics system.
 
     var ss = {};
@@ -131,6 +131,7 @@
 
         return linreg;
     }
+}
 
     // # [R Squared](http://en.wikipedia.org/wiki/Coefficient_of_determination)
     //
@@ -1077,7 +1078,7 @@
     // [3](https://github.com/simogeo/geostats/blob/master/lib/geostats.js#L407) (works)
     //
     // Depends on `jenksBreaks()` and `jenksMatrices()`
-    function jenks(data, n_classes) {
+function jenks(data, n_classes) {
 
         if (n_classes > data.length) return null;
 
@@ -1631,71 +1632,70 @@
         return extending;
     }
 
-    ss.linear_regression = linear_regression;
-    ss.standard_deviation = standard_deviation;
-    ss.r_squared = r_squared;
-    ss.median = median;
-    ss.mean = mean;
-    ss.mode = mode;
-    ss.min = min;
-    ss.max = max;
-    ss.sum = sum;
-    ss.quantile = quantile;
-    ss.quantile_sorted = quantile_sorted;
-    ss.iqr = iqr;
-    ss.mad = mad;
+    // ss.linear_regression = linear_regression;
+    // ss.standard_deviation = standard_deviation;
+    // ss.r_squared = r_squared;
+    // ss.median = median;
+    // ss.mean = mean;
+    // ss.mode = mode;
+    // ss.min = min;
+    // ss.max = max;
+    // ss.sum = sum;
+    // ss.quantile = quantile;
+    // ss.quantile_sorted = quantile_sorted;
+    // ss.iqr = iqr;
+    // ss.mad = mad;
 
-    ss.chunk = chunk;
-    ss.shuffle = shuffle;
-    ss.shuffle_in_place = shuffle_in_place;
+    // ss.chunk = chunk;
+    // ss.shuffle = shuffle;
+    // ss.shuffle_in_place = shuffle_in_place;
 
-    ss.sample = sample;
+    // ss.sample = sample;
 
-    ss.sample_covariance = sample_covariance;
-    ss.sample_correlation = sample_correlation;
-    ss.sample_variance = sample_variance;
-    ss.sample_standard_deviation = sample_standard_deviation;
-    ss.sample_skewness = sample_skewness;
+    // ss.sample_covariance = sample_covariance;
+    // ss.sample_correlation = sample_correlation;
+    // ss.sample_variance = sample_variance;
+    // ss.sample_standard_deviation = sample_standard_deviation;
+    // ss.sample_skewness = sample_skewness;
 
-    ss.geometric_mean = geometric_mean;
-    ss.harmonic_mean = harmonic_mean;
-    ss.root_mean_square = root_mean_square;
-    ss.variance = variance;
-    ss.t_test = t_test;
-    ss.t_test_two_sample = t_test_two_sample;
+    // ss.geometric_mean = geometric_mean;
+    // ss.harmonic_mean = harmonic_mean;
+    // ss.root_mean_square = root_mean_square;
+    // ss.variance = variance;
+    // ss.t_test = t_test;
+    // ss.t_test_two_sample = t_test_two_sample;
 
-    // jenks
-    ss.jenksMatrices = jenksMatrices;
-    ss.jenksBreaks = jenksBreaks;
-    ss.jenks = jenks;
+    // // jenks
+    // ss.jenksMatrices = jenksMatrices;
+    // ss.jenksBreaks = jenksBreaks;
+    // ss.jenks = jenks;
 
-    ss.bayesian = bayesian;
+    // ss.bayesian = bayesian;
 
-    ss.perceptron = perceptron;
+    // ss.perceptron = perceptron;
 
-    // Distribution-related methods
-    ss.epsilon = epsilon; // We make ε available to the test suite.
-    ss.factorial = factorial;
-    ss.bernoulli_distribution = bernoulli_distribution;
-    ss.binomial_distribution = binomial_distribution;
-    ss.poisson_distribution = poisson_distribution;
-    ss.chi_squared_goodness_of_fit = chi_squared_goodness_of_fit;
+    // // Distribution-related methods
+    // ss.epsilon = epsilon; // We make ε available to the test suite.
+    // ss.factorial = factorial;
+    // ss.bernoulli_distribution = bernoulli_distribution;
+    // ss.binomial_distribution = binomial_distribution;
+    // ss.poisson_distribution = poisson_distribution;
+    // ss.chi_squared_goodness_of_fit = chi_squared_goodness_of_fit;
 
-    // Normal distribution
-    ss.z_score = z_score;
-    ss.cumulative_std_normal_probability = cumulative_std_normal_probability;
-    ss.standard_normal_table = standard_normal_table;
-    ss.error_function = error_function;
-    ss.inverse_error_function = inverse_error_function;
-    ss.probit = probit;
+    // // Normal distribution
+    // ss.z_score = z_score;
+    // ss.cumulative_std_normal_probability = cumulative_std_normal_probability;
+    // ss.standard_normal_table = standard_normal_table;
+    // ss.error_function = error_function;
+    // ss.inverse_error_function = inverse_error_function;
+    // ss.probit = probit;
 
-    // Alias this into its common name
-    ss.average = mean;
-    ss.interquartile_range = iqr;
-    ss.mixin = mixin;
-    ss.median_absolute_deviation = mad;
-    ss.rms = root_mean_square;
-    ss.erf = error_function;
+    // // Alias this into its common name
+    // ss.average = mean;
+    // ss.interquartile_range = iqr;
+    // ss.mixin = mixin;
+    // ss.median_absolute_deviation = mad;
+    // ss.rms = root_mean_square;
+    // ss.erf = error_function;
 
-    return ss;
-}));
+    // return ss;

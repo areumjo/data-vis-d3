@@ -108,3 +108,21 @@
     - convert TopoJSON to GeoJSON
     - `.features()` is a property that allows us to use the returned GeoJSON's features as our data
 - `GeooJSON`: `.data(counties.feature)`
+
+### 4. A d3 map using queue.js
+- `d3.queue()`
+    - evaluates zero or more deferred asynchronous tasks
+    - you control how many tasks run at the same time
+    - when all the tasks complete (or an error occurs), the queue passes the results to your `await` callback
+    - load `<script src="https://d3js.org/d3-queue.v3.min.js"></script>` to html
+- `d3.json().then()` can be used.
+    - for multiple asyn task, use `Promise.all()`
+    ```js
+    Promise.all([
+        d3.tsv('https://unpkg.com/world-atlas@1.1.4/world/110m.tsv'),
+        d3.json('https://unpkg.com/world-atlas@1.1.4/world/110m.json')
+        ]).then(([tsvData, topojsonData]) => {
+            console.log(tsvData);
+            console.log(topojsonData);
+        });
+    ```
